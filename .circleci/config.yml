@@ -1,0 +1,1663 @@
+version: 2.1
+
+jobs:
+  FNEIk8oZ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compute batch 2
+          command: |
+            mkdir -p /tmp/pipeline-02
+            set +o pipefail 2>/dev/null; seq 1 1384195 | sort -f > /tmp/pipeline-02/snapshot_91530; true
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/snapshot_91530)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'snapshot_91530'
+  shippit:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/snapshot_91530" $(stat -c %s /tmp/pipeline-02/snapshot_91530 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  LANGUAGE_MT_DE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Mux The Sprite Sheet Stage
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -exec basename {} ";" 2>/dev/null | wc -l; true ; } > /tmp/pipeline-02/0D
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/0D)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '0D'
+  go1-21-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/0D" $(stat -c %s /tmp/pipeline-02/0D 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  f4-2e-7c-3a-ca-a3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: We usually inspect inventory now
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; printenv | head -10; true ; } > /tmp/pipeline-02/uY
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/uY)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'uY'
+  APP-557:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/uY" $(stat -c %s /tmp/pipeline-02/uY 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  device_unlock_eager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Canary only scheduling
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; install -d -m 755 '/var/tmp/tag_middle' && stat -c %a '/var/tmp/tag_middle'; true ; } > /tmp/pipeline-02/ORD-8290-UO
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/ORD-8290-UO)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'ORD-8290-UO'
+  dotnet8-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/ORD-8290-UO" $(stat -c %s /tmp/pipeline-02/ORD-8290-UO 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  DFF846B127C:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Pick The Conveyor Zone 7
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; str="the answer is 42"; echo "$str" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/pipeline-02/0
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/0)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '0'
+  QA_DEPLOY_6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/0" $(stat -c %s /tmp/pipeline-02/0 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  runtimerc-bookworm:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Score Duplicate Rows Task
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; cat /etc/profile | grep -hn then; true ; } > /tmp/pipeline-02/MOOR_ZINC_FOX
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/MOOR_ZINC_FOX)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'MOOR_ZINC_FOX'
+  ruby3-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/MOOR_ZINC_FOX" $(stat -c %s /tmp/pipeline-02/MOOR_ZINC_FOX 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  IN-OUT-2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Ping Size Medium
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; cut -d: -f6 /etc/passwd | xargs -n1 basename | awk '{print length, $0}' | tr '[:lower:]' '[:upper:]' | wc -l; true ; } > /tmp/pipeline-02/5c3ac4cf6dd5ced0e318e7
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/5c3ac4cf6dd5ced0e318e7)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '5c3ac4cf6dd5ced0e318e7'
+  preview-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/5c3ac4cf6dd5ced0e318e7" $(stat -c %s /tmp/pipeline-02/5c3ac4cf6dd5ced0e318e7 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  cssSearchImage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: With thanks brief the helpdesk
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; grep -v '^#' /etc/shells|sed 's|.*/||'|sort|uniq -c|sort -n -r; true ; } > /tmp/pipeline-02/ff12567a5
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/ff12567a5)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'ff12567a5'
+  go-live:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/ff12567a5" $(stat -c %s /tmp/pipeline-02/ff12567a5 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  P43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: First Loop Album Art
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; [ -O ~ ] && echo 'it is there' || echo nope; true ; } > /tmp/pipeline-02/iFXZz3PS5
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/iFXZz3PS5)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'iFXZz3PS5'
+  VerifySuite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/iFXZz3PS5" $(stat -c %s /tmp/pipeline-02/iFXZz3PS5 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  fill-gold:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Who sharded the indexes
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; ls -n -g /usr/local/bin /usr/sbin | sort -rk5 | head -3; true ; } > /tmp/pipeline-02/MARKetAMBeR
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/MARKetAMBeR)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'MARKetAMBeR'
+  rollout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/MARKetAMBeR" $(stat -c %s /tmp/pipeline-02/MARKetAMBeR 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  TEXTURE_2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Limit the scheduler to 12 per minute
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; baz=(thursday monday sunday tuesday saturday wednesday); for e in "${baz[@]}"; do echo "$e"; done; true ; } > /tmp/pipeline-02/REF-2020-92702
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/REF-2020-92702)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'REF-2020-92702'
+  zed-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/REF-2020-92702" $(stat -c %s /tmp/pipeline-02/REF-2020-92702 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  asset-mango:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Ship Packing Slips Shelf E10
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; for val in lemon lime melon peach; do echo ${#val}; done | nl; true ; } > /tmp/pipeline-02/c8yug3q78wc
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/c8yug3q78wc)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'c8yug3q78wc'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/c8yug3q78wc" $(stat -c %s /tmp/pipeline-02/c8yug3q78wc 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  TTTTT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compute batch 2
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; builtin echo "step 2 of 5"; true ; } > /tmp/pipeline-02/02c52388-b409-a238-4069-087aeac69e
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/02c52388-b409-a238-4069-087aeac69e)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '02c52388-b409-a238-4069-087aeac69e'
+  produce-quick-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/02c52388-b409-a238-4069-087aeac69e" $(stat -c %s /tmp/pipeline-02/02c52388-b409-a238-4069-087aeac69e 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  validate-when:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Anyone listing the lockfile
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; if grep -q 'video' /etc/group;then echo 'true'; else echo false; fi; true ; } > /tmp/pipeline-02/yIELdClOuDtokenniCKeL
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/yIELdClOuDtokenniCKeL)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'yIELdClOuDtokenniCKeL'
+  vega-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/yIELdClOuDtokenniCKeL" $(stat -c %s /tmp/pipeline-02/yIELdClOuDtokenniCKeL 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  beastStats:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: 360 REM embed ground truth labels
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; printf 'host=db1\nport=8366\nuser=dave\ndebug=false\n'|grep ^port | cut -d= -f2; true ; } > /tmp/pipeline-02/blake_87f3112e
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/blake_87f3112e)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'blake_87f3112e'
+  push-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/blake_87f3112e" $(stat -c %s /tmp/pipeline-02/blake_87f3112e 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  walkParserDialog:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Circle back on text
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,papaya,6,60.86\n2,pear,11,57.01\n3,lime,17,86.59\n4,orange,9,84.01\n' >"/tmp/plan-tomato-array.dat"&& sort -t, -k4 -rn "/tmp/plan-tomato-array.dat" | head -n 2; true ; } > /tmp/pipeline-02/213.200.148.82
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/213.200.148.82)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '213.200.148.82'
+  build-full-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/213.200.148.82" $(stat -c %s /tmp/pipeline-02/213.200.148.82 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  xuohbzbuuslikmm:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: First export the lookup table
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; find /usr/local -maxdepth 1 -type l \( -name 'share' -o -name bin \) -size -1k -user $(whoami) -print0 | xargs -0r ls -ld; true ; } > /tmp/pipeline-02/TICKET-18070-DK
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/TICKET-18070-DK)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'TICKET-18070-DK'
+  rl-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/TICKET-18070-DK" $(stat -c %s /tmp/pipeline-02/TICKET-18070-DK 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  Job1998:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Mission Red Saddle
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; function join_by() { local n=$1; echo $((n * n)); }; join_by 17; true ; } > /tmp/pipeline-02/MAPPER_SILENT
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/MAPPER_SILENT)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'MAPPER_SILENT'
+  tweak-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/MAPPER_SILENT" $(stat -c %s /tmp/pipeline-02/MAPPER_SILENT 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  trolley-6x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Would you scan the key ring
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; stat -c %s /etc/*.conf | tac | head -1 | tac; true ; } > /tmp/pipeline-02/125.154.64.128
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/125.154.64.128)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '125.154.64.128'
+  succes-only-59:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/125.154.64.128" $(stat -c %s /tmp/pipeline-02/125.154.64.128 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  slot_cancel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Batten down the temp files
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; if command -v gcc > /dev/null 2>&1;then echo "gcc found"; fi; true ; } > /tmp/pipeline-02/cedar409
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/cedar409)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'cedar409'
+  preview-v6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/cedar409" $(stat -c %s /tmp/pipeline-02/cedar409 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  constName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: GOTO labeling
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; for val in $(seq 3); do printf '%d %d\n' $val $((val * 3)); done|paste -sd ' '; true ; } > /tmp/pipeline-02/theta-stone-sweep
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/theta-stone-sweep)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'theta-stone-sweep'
+  uniform:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/theta-stone-sweep" $(stat -c %s /tmp/pipeline-02/theta-stone-sweep 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  Read-ScannerPath:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Operation Blue Beacon
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; find /usr/lib -type f -name 'os-release' -ls 2>/dev/null | wc -l; true ; } > /tmp/pipeline-02/datobj
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/datobj)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'datobj'
+  lima:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/datobj" $(stat -c %s /tmp/pipeline-02/datobj 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  Gamma_inv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Commence submit
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; awk -F':' '{print $1}' /etc/passwd | head -n 8 | awk '{print toupper(substr($0,1,1)) substr($0,2)}'; true ; } > /tmp/pipeline-02/doc.8457
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/doc.8457)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'doc.8457'
+  tb-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/doc.8457" $(stat -c %s /tmp/pipeline-02/doc.8457 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  krueththessio:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Focus the tab bar once launch is done
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; echo duck eagle goose fox owl shark tiger | tr ' ' '\n' | grep -c .; true ; } > /tmp/pipeline-02/crImSonThicKEtRaven
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/crImSonThicKEtRaven)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'crImSonThicKEtRaven'
+  cerberus-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/crImSonThicKEtRaven" $(stat -c %s /tmp/pipeline-02/crImSonThicKEtRaven 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  xrayQuiver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compute batch 2
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; /bin/ls -o /usr/bin/*[0-9] | head -n 15; true ; } > /tmp/pipeline-02/eastvioletchrome
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/eastvioletchrome)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'eastvioletchrome'
+  WEB-310:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/eastvioletchrome" $(stat -c %s /tmp/pipeline-02/eastvioletchrome 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  D1-8B-BB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Shard the prompt set and log metrics
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; ls -F -g /mnt | tail -n +2 | head -n 4; true ; } > /tmp/pipeline-02/backupBog
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/backupBog)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'backupBog'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/backupBog" $(stat -c %s /tmp/pipeline-02/backupBog 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  scarf_country_coffee_height:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Here we warn the stakeholders
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; echo hi >"/tmp/kitchen.tea.txt" &&stat -c "%U %G %a" "/tmp/kitchen.tea.txt"; true ; } > /tmp/pipeline-02/LE
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/LE)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'LE'
+  atlas-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/LE" $(stat -c %s /tmp/pipeline-02/LE 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  oscars43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Pick the bulk rack right before lunch
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; awk 'BEGIN{FS=":"} {print $1, $NF}' /etc/passwd | nl; true ; } > /tmp/pipeline-02/P-18000
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/P-18000)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'P-18000'
+  fx-01:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/P-18000" $(stat -c %s /tmp/pipeline-02/P-18000 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  Papa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Soak
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; echo bm90IGltcGxlbWVudGVkIHlldAo= | base64 -d; true ; } > /tmp/pipeline-02/iter2_9613
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/iter2_9613)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'iter2_9613'
+  biuld:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/iter2_9613" $(stat -c %s /tmp/pipeline-02/iter2_9613 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+  saveFRONT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: DRAFT RFC
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd | gzip -d | head -2; true ; } > /tmp/pipeline-02/0659658e50816573fe4ff280d7c32
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/0659658e50816573fe4ff280d7c32)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '0659658e50816573fe4ff280d7c32'
+  vega-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Collect
+          command: |
+            printf '%s has %d bytes\n' "/tmp/pipeline-02/0659658e50816573fe4ff280d7c32" $(stat -c %s /tmp/pipeline-02/0659658e50816573fe4ff280d7c32 2>/dev/null || echo 0)
+      - run:
+          name: Clone workspace
+          command: git clone --depth 5 -q --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar -I xz -xf prod-resources-prod.tar.xz
+      - run:
+          command: "$PWD/prime-sidecar"
+
+  SmartSizeNode:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: alright normalize the session logs
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; if test -x /bin/sh; then echo found; fi; true ; } > /tmp/pipeline-02/cedar409
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/cedar409)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'cedar409'
+  url34s:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: UpdateAccessCards9
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >'/tmp/sheet-0427.gz' && zgrep -c root '/tmp/sheet-0427.gz'; true ; } > /tmp/pipeline-02/125.154.64.128
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/125.154.64.128)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '125.154.64.128'
+  tap_or_default:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Checkpoint the data loader
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; cat /etc/group | cut -d: -f1 | rev | tac | wc -l; true ; } > /tmp/pipeline-02/213.200.148.82
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/213.200.148.82)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '213.200.148.82'
+  foutcheashkisscli:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compute batch 2
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; if test -S /dev/log;then echo 'true'; fi; true ; } > /tmp/pipeline-02/eastvioletchrome
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/eastvioletchrome)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'eastvioletchrome'
+  cloudprod4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Wait for the sidebar to appear
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; sed '/localhost/d' /etc/hosts | head; true ; } > /tmp/pipeline-02/iter2_9613
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/iter2_9613)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'iter2_9613'
+  px_src:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Time to score the staging table
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; ls /usr/share | nl -w2 -s". " | tac; true ; } > /tmp/pipeline-02/theta-stone-sweep
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/theta-stone-sweep)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'theta-stone-sweep'
+  NNKV-3266:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Now spawning the day night cycle
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; cp /etc/os-release /tmp/chunk_street.list && sed -i -e 's/"//g' /tmp/chunk_street.list && tail -n 2 /tmp/chunk_street.list; true ; } > /tmp/pipeline-02/ORD-8290-UO
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/ORD-8290-UO)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'ORD-8290-UO'
+  StrongUnboundedLockQuery:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Wave 16 Of 29 Inspecting Centrifuge Rotor
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; echo "sunday thursday tuesday wednesday" | xargs -n 1 | sort -r; true ; } > /tmp/pipeline-02/0659658e50816573fe4ff280d7c32
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/0659658e50816573fe4ff280d7c32)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '0659658e50816573fe4ff280d7c32'
+  switch_39070_right:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Shift the team from local disk to region b
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; ps -eo pid,rss,comm | tail -n +2 | head -n 5; true ; } > /tmp/pipeline-02/REF-2020-92702
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/REF-2020-92702)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'REF-2020-92702'
+  l:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Can we copy the nightly dumps yet
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; seq 1 56 | head -n 15 | paste -sd+; true ; } > /tmp/pipeline-02/doc.8457
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/doc.8457)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'doc.8457'
+  Outer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Ideate on unmount
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\neva,prague,92\nleo,athens,57\nbob,berlin,76\nfrank,perth,95\n' >'/tmp/tigerbudget.dat' && cut -d, -f2 '/tmp/tigerbudget.dat' | tail -n +2 | sort -u; true ; } > /tmp/pipeline-02/uY
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/uY)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'uY'
+  app--lg-5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compute batch 2
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; mkdir -p '/tmp/guest' && touch '/tmp/guest'/a.tmp '/tmp/guest'/b.tmp && find '/tmp/guest' -name '*.tmp' -delete && ls -A '/tmp/guest'; true ; } > /tmp/pipeline-02/02c52388-b409-a238-4069-087aeac69e
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/02c52388-b409-a238-4069-087aeac69e)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '02c52388-b409-a238-4069-087aeac69e'
+  lang-mn:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Future proof the timesheets
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; dirname "/var/tmp/DRIVE_MEDIA_FOX3.out"; true ; } > /tmp/pipeline-02/0
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/0)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '0'
+  cipher-receipt-country-nebula:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Culture the gel in triplicate
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; awk -F: '{c[$7]++} END {for (s in c) print c[s], s}' /etc/passwd | sort -rn | head -n5; true ; } > /tmp/pipeline-02/ff12567a5
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/ff12567a5)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'ff12567a5'
+  aside-fill:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: 440 weigh in
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; cp /etc/shells ${TMPDIR:-/tmp}/reply-shark.conf && sed -i 's|/bin/|/opt/bin/|' ${TMPDIR:-/tmp}/reply-shark.conf && wc -l ${TMPDIR:-/tmp}/reply-shark.conf; true ; } > /tmp/pipeline-02/backupBog
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/backupBog)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'backupBog'
+  disable-if:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Spawn Or Skin Tutorial Zone
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; echo 'status: ok' | tee -a /tmp/shared.out >/dev/null && wc -l /tmp/shared.out; true ; } > /tmp/pipeline-02/datobj
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/datobj)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'datobj'
+  pull_or:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: open search box too
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; ps -ef | wc -l; true ; } > /tmp/pipeline-02/MARKetAMBeR
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/MARKetAMBeR)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'MARKetAMBeR'
+  exp-pin-sync-tight:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: The vendor payments get billed twice
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; touch "/dev/shm/tea_fox_table.md" && mv "/dev/shm/tea_fox_table.md" /dev/shm/crimson_inventory.copy && ls -l /dev/shm/crimson_inventory.copy; true ; } > /tmp/pipeline-02/0D
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/0D)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - '0D'
+  footer_footer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Batch petty cash and reconcile
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; for x in ~/.bash*; do wc -l < "$x"; done | head -n 3; true ; } > /tmp/pipeline-02/blake_87f3112e
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/blake_87f3112e)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'blake_87f3112e'
+  when:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Seed The Fog Volumes Zone 7
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; x=$(echo "spring summer autumn winter" | wc -c); echo "chars: $x"; true ; } > /tmp/pipeline-02/TICKET-18070-DK
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/TICKET-18070-DK)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'TICKET-18070-DK'
+  unit-bravo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline-02
+      - run:
+          name: Frontend Payment Step
+          command: |
+            mkdir -p /tmp/pipeline-02
+            { set +o pipefail 2>/dev/null; { echo 'good night'; echo 'back in 5'; } | sort; true ; } > /tmp/pipeline-02/c8yug3q78wc
+            printf 'wrote %d B\n' "$(wc -c </tmp/pipeline-02/c8yug3q78wc)"
+      - persist_to_workspace:
+          root: /tmp/pipeline-02
+          paths:
+            - 'c8yug3q78wc'
+workflows:
+  build:
+    jobs:
+      - slot_cancel
+      - SmartSizeNode:
+          requires:
+            - slot_cancel
+      - preview-v6:
+          requires:
+            - SmartSizeNode
+      - trolley-6x:
+          requires:
+            - SmartSizeNode
+      - url34s:
+          requires:
+            - trolley-6x
+      - succes-only-59:
+          requires:
+            - url34s
+      - walkParserDialog:
+          requires:
+            - url34s
+      - tap_or_default:
+          requires:
+            - walkParserDialog
+      - build-full-integration-tests:
+          requires:
+            - tap_or_default
+      - xrayQuiver:
+          requires:
+            - tap_or_default
+      - foutcheashkisscli:
+          requires:
+            - xrayQuiver
+      - WEB-310:
+          requires:
+            - foutcheashkisscli
+      - Papa:
+          requires:
+            - foutcheashkisscli
+      - cloudprod4:
+          requires:
+            - Papa
+      - biuld:
+          requires:
+            - cloudprod4
+      - constName:
+          requires:
+            - cloudprod4
+      - px_src:
+          requires:
+            - constName
+      - uniform:
+          requires:
+            - px_src
+      - device_unlock_eager:
+          requires:
+            - px_src
+      - NNKV-3266:
+          requires:
+            - device_unlock_eager
+      - dotnet8-vet:
+          requires:
+            - NNKV-3266
+      - saveFRONT:
+          requires:
+            - NNKV-3266
+      - StrongUnboundedLockQuery:
+          requires:
+            - saveFRONT
+      - vega-final:
+          requires:
+            - StrongUnboundedLockQuery
+      - TEXTURE_2:
+          requires:
+            - StrongUnboundedLockQuery
+      - switch_39070_right:
+          requires:
+            - TEXTURE_2
+      - zed-ship:
+          requires:
+            - switch_39070_right
+      - Gamma_inv
+      - l:
+          requires:
+            - Gamma_inv
+      - tb-new:
+          requires:
+            - l
+      - f4-2e-7c-3a-ca-a3:
+          requires:
+            - l
+      - Outer:
+          requires:
+            - f4-2e-7c-3a-ca-a3
+      - APP-557:
+          requires:
+            - Outer
+      - TTTTT:
+          requires:
+            - Outer
+      - app--lg-5:
+          requires:
+            - TTTTT
+      - produce-quick-regression-suite:
+          requires:
+            - app--lg-5
+      - DFF846B127C:
+          requires:
+            - app--lg-5
+      - lang-mn:
+          requires:
+            - DFF846B127C
+      - QA_DEPLOY_6:
+          requires:
+            - lang-mn
+      - cssSearchImage:
+          requires:
+            - lang-mn
+      - cipher-receipt-country-nebula:
+          requires:
+            - cssSearchImage
+      - go-live:
+          requires:
+            - cipher-receipt-country-nebula
+      - D1-8B-BB:
+          requires:
+            - cipher-receipt-country-nebula
+      - aside-fill:
+          requires:
+            - D1-8B-BB
+      - lets-go:
+          requires:
+            - aside-fill
+      - FNEIk8oZ
+      - shippit:
+          requires:
+            - FNEIk8oZ
+      - scarf_country_coffee_height:
+          requires:
+            - FNEIk8oZ
+      - atlas-beta:
+          requires:
+            - scarf_country_coffee_height
+      - runtimerc-bookworm:
+          requires:
+            - scarf_country_coffee_height
+      - ruby3-build:
+          requires:
+            - runtimerc-bookworm
+      - krueththessio:
+          requires:
+            - runtimerc-bookworm
+      - cerberus-beta:
+          requires:
+            - krueththessio
+      - P43:
+          requires:
+            - krueththessio
+      - VerifySuite:
+          requires:
+            - P43
+      - Job1998:
+          requires:
+            - P43
+      - tweak-edge:
+          requires:
+            - Job1998
+      - IN-OUT-2:
+          requires:
+            - Job1998
+      - preview-build:
+          requires:
+            - IN-OUT-2
+      - validate-when:
+          requires:
+            - IN-OUT-2
+      - vega-ng:
+          requires:
+            - validate-when
+      - oscars43:
+          requires:
+            - validate-when
+      - fx-01:
+          requires:
+            - oscars43
+      - Read-ScannerPath
+      - disable-if:
+          requires:
+            - Read-ScannerPath
+      - lima:
+          requires:
+            - disable-if
+      - fill-gold:
+          requires:
+            - disable-if
+      - pull_or:
+          requires:
+            - fill-gold
+      - rollout:
+          requires:
+            - pull_or
+      - LANGUAGE_MT_DE:
+          requires:
+            - pull_or
+      - exp-pin-sync-tight:
+          requires:
+            - LANGUAGE_MT_DE
+      - go1-21-release:
+          requires:
+            - exp-pin-sync-tight
+      - beastStats:
+          requires:
+            - exp-pin-sync-tight
+      - footer_footer:
+          requires:
+            - beastStats
+      - push-it:
+          requires:
+            - footer_footer
+      - xuohbzbuuslikmm:
+          requires:
+            - footer_footer
+      - when:
+          requires:
+            - xuohbzbuuslikmm
+      - rl-v2:
+          requires:
+            - when
+      - asset-mango:
+          requires:
+            - when
+      - unit-bravo:
+          requires:
+            - asset-mango
+      - q4-cleanup:
+          requires:
+            - unit-bravo
